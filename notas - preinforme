@@ -1,0 +1,15 @@
+usar smote
+
+decidir cuantas
+
+definir porcentajes
+
+ir aumentando el porcentaje (hasta 15%)
+
+sobre el conjunto de entrenamiento. 
+
+mirar sensibilidad y especifidad
+
+one hot encoding cuando no son niveles
+
+
