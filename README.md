@@ -7,15 +7,15 @@ Para abrir base de datos en forma matricial
 
 load('data_mat.mat')
 
-
-//Esto se va a cambiar por One-Hot Encoding
 Se utiliza una recodificacion para las variables categoricas
 a (No Hazard) -> 0
 b (Low Hazard) -> 1
 c (High Hazard) -> 2
 b (Danger State) -> 3
-N (Coal-getting) -> 0
-W (Preparement Shift) -> 1
+
+//Estas caracteristicas son categoricas, se realiza one-hot encoding
+N (Coal-getting) -> 10
+W (Preparement Shift) -> 01
 
 
 el archivo decodevars.m es quien hace la recodificación, para cualquier cambio en la codificación,
