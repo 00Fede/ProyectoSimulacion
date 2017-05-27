@@ -11,13 +11,13 @@ T = P';
 X = T;
 
 % Finding the 5 positive nearest neighbours of all the positive blobs
-I = nearestneighbour(T, X, 'NumberOfNeighbours', 4);
+I = nearestneighbour(T, X, 'NumberOfNeighbours', 8);
 
 I = I';
 
 [r c] = size(I);
 S = [];
-th=0.3;
+th=0.30;
 for i=1:r
     for j=2:c
         index = I(i,j);
