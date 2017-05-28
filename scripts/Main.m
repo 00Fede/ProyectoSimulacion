@@ -2,43 +2,52 @@
 % los diferentes modelos de simulación en el data-set.
 % Se asume que las variables fueron codificadas respectivamente y se hizo
 % selección de variables previo.
-punto=input('Seleccione:\n1 - Prueba de regresión logistica\n2 - GMM\n3 - Random Forest\n4 - RNA\n5 - SVM\n6 - k-vecinos\n7 - k-means\n8 - Arboles de decisión\n');
+punto=input('Seleccione:\n1 - Funciones Discriminantes Gaussianas\n2 - K-vecinos\n3 - Redes Neuronales Artificiales\n4 - Random Forest\n5 - Maquinas de Soporte Vectorial\n');
+
+load('data_mat_enc.mat'); %% Carga BD con variables codificadas
 
 
+rept = 10;  % Numero de pliegues, repeticiones para cv
+N = size(X,1); % Numero de muestras
 
 switch(punto)
     case 1
-        %Regresion logistica
+        % Funciones Discriminantes Gaussianas
+        X = X(:,[1:14,18,19]); % quitamos cols cuya var es 0
+        eficiencia = zeros(1,rept); %vector fila para guardar eficiencia de c/fold
+        for fold=1:rept
+            
+            rng('default');
+            particion = cvpartition(N,'k',rept);  %genera validación cruzada
+            Xtrain=X(particion.training(fold),:);
+            Ytrain=Y(particion.training(fold));
+            Xtest=X(particion.test(fold),:);
+            Ytest=Y(particion.test(fold));
+            
+            % Genera el modelo con las muestra de entrenamiento
+            model = fitcdiscr(Xtrain,Ytrain); 
+            % hace prediccion de muestras de validacion
+            Yesti = model.predict(Xtest);
+            
+            eficiencia(fold) = (sum(Yesti==Ytest)/length(Ytest));
+        end
         
-        W=regresionLogistica(Xtrain,Ytrain,eta); %%% Se obtienen los W coeficientes del polinomio
+        Eficiencia = mean(eficiencia);
+        IC = std(eficiencia);
         
-        Yesti=(W'*Xtest')';
-        Yesti(Yesti>=0)=1;
-        Yesti(Yesti<0)=0;
+        Text = ['La eficiencia obtenida de funciones discr. gauss. es ',num2str(Eficiencia),' +-',num2str(IC)];
+        disp(Text);
         
-        Eficiencia=(sum(Yesti==Ytest))/length(Ytest);
-        Error=1-Eficiencia;
+        %%% Fin Funciones discriminantes gaussianas %%%
         
-        %     Texto=strcat('La eficiencia en prueba es: ',{' '},num2str(Eficiencia));
-        Texto=['La eficiencia en prueba es: ',num2str(Eficiencia)];
-        disp(Texto);
-        %Texto=strcat('El error de clasificaci�n en prueba es: ',{' '},num2str(Error));
-        Texto=['El error de clasificaci�n en prueba es: ',num2str(Error)];
-        disp(Texto);
     case 2
-        %GMM
+        % K vecinos
     case 3
-        %Random Forest
+        % RNA
     case 4
-        %RNA
+        % Random Forest
     case 5
-        %SVM
-    case 6
-        %k-vecinos
-    case 7
-        %k-means
-    case 8
-        %Arboles de decision
+        % SVM
     otherwise
         disp('Opcion no valida, Saliendo...');
 end

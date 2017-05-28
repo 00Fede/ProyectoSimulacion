@@ -3,7 +3,7 @@ clear all
 close all
 
 % Carga base de datos, tabla de X con atributos, tabla de Y con salidas
-load('data_tab'); 
+load('data_tab.mat'); 
 
 
 N = size(X,1); % Obtiene nro de filas de tabla
@@ -50,7 +50,7 @@ end
 
 
 % Organiza la matriz final  con las variables codificadas
-full = [out(:,1:2),shift_one_hot,out(:,4),table2array(X(:,5:size(X,2)))]; %% Concatena las variables recodificadas con el resto de la tabla
+X_encoded = [out(:,1:2),shift_one_hot,out(:,4),table2array(X(:,5:size(X,2)))]; %% Concatena las variables recodificadas con el resto de la tabla
 
 disp('fin de decodificacion');
 

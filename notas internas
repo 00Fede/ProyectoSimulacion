@@ -79,6 +79,28 @@ Se seleccionaron 7 componentes principales
 //LASSO no es usado
 La eficiencia obtenida fue = 0.87534 +- 0.018337
 
+------ Tirar modelos
+
+Inicialmente tiramos estos modelos con el dataset sobremuestreado con smotes,
+ya que sabemos que si lo tiramos no van a dar buenos resultados debido al desbalance.
+Lo tiramos también con la codificación, peroooo sin selecciónn/extracción de caracterisiticas
+para poder comparar luegos los resultados. capichi.
+
+las columnas 15,16,17 del dataset tienen varianza cero, esto afecta la ejecución de algunos
+modelos, por tanto se remueven.
+
+
+--->> Tirar funciones discriminantes gaussianas
+Intente tirar fitcdiscr con CrossVal On pero no supe hacer la implementacion
+Se tira implementación segun el profe, de 10 kfolds.
+
+La eficiencia obtenida de funciones discr. gauss. es 0.92412 +-0.026465
+
+
+
+
+
+
 
 
 
