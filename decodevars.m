@@ -35,7 +35,7 @@ for j=1:M
     end
 end
 
-%% One-hot encoding to column Shift, index 3
+%% One-hot encoding to column Shift, index 3 based on https://gist.github.com/zygmuntz/6939718
 % Toma numero de categorias
 n_categorias = size(    unique(X(:,3))     ,    1   );
 
