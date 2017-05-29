@@ -21,5 +21,8 @@ W (Preparement Shift) -> 01<br>
 el archivo decodevars.m es quien hace la recodificación, para cualquier cambio en la codificación,
 cambiar el switch que hay adentro y correr decodevars.m
 
+<b>SMOTE</b>
+Para evitar desbalanceo de clases se aplica SMOTE. En carpeta SMOTE el script hacerSMOTE.m aplica SMOTE con parametros th=0.3 y numero de vecinos 8 a dataset, redondea las muestras para coincidir con variables categoricas y finalmente permuta aleatoriamente los indices para generar mas aleatoriedad. Guarda el data_set con SMOTE en data_smoted.mat.
+
 <b>Federico</b>
 

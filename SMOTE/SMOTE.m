@@ -1,4 +1,4 @@
-function [final_features final_mark] = SMOTE(original_features, original_mark)
+function [final_features final_mark] = SMOTE(original_features, original_mark, num_neighbours, th_val)
 
 
 ind = find(original_mark == 1);
@@ -11,13 +11,13 @@ T = P';
 X = T;
 
 % Finding the 5 positive nearest neighbours of all the positive blobs
-I = nearestneighbour(T, X, 'NumberOfNeighbours', 8);
+I = nearestneighbour(T, X, 'NumberOfNeighbours', num_neighbours);
 
 I = I';
 
 [r c] = size(I);
 S = [];
-th=0.30;
+th=th_val;
 for i=1:r
     for j=2:c
         index = I(i,j);
@@ -33,7 +33,7 @@ original_mark = [original_mark;mark];
 
 train_incl = ones(length(original_mark), 1);
 
-I = nearestneighbour(original_features', original_features', 'NumberOfNeighbours', 4);
+I = nearestneighbour(original_features', original_features', 'NumberOfNeighbours', num_neighbours);
 I = I';
 for j = 1:length(original_mark)
     len = length(find(original_mark(I(j, 2:4)) ~= original_mark(j,1)));
